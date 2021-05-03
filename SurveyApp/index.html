@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+    <head>
+        <title>Survey</title>
+        <meta http-equiv="content-type" content="text/html; charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link rel="stylesheet" href="./css/w3css/style.css"> 
+        <script src="./js/jquery-3.6.0.min.js"></script>
+        <script src="./js/app.js"></script>
+        <script>      
+	    $(function() {
+            $("#Alert").hide();
+            $("#Result").hide()
+            $("#mainCard").hide();
+            $("#Goodbye").hide()
+
+            $("#Confirm").on( "click",  function() {
+                $("#Welcome").hide();
+                $("#mainCard").show()
+            });
+
+            $("#Cancel").on( "click",  function() {
+                $("#Welcome").hide();
+                $("#Goodbye").show()
+            });
+
+            $("#Goodbye").on( "click",  function() {
+                location.reload()
+            });
+            $("#Alert").on( "click",  function() {
+                closeAlert();
+            });
+            $("#RestartBtn").on( "click",  function() {
+                location.reload()
+            })
+            SurveyAppManager.init({
+                displayQuestionFn : displayQuestion,
+                displaySurveyResultFn: displayResult,
+                 //displayBannerFn: showCompleteBannerMessageReport,
+                 callbackErrorFn: displayAlert,
+
+            });
+            SurveyAppManager.getQuestionFromJSON();
+
+            $("#netx").on( "click",  function() {
+                var myRadio = $("input[name=answer]:checked").val();
+                // alert here
+                if(myRadio === undefined) {
+                    displayAlert("Make a choice before continue")
+                }else{
+                    SurveyAppManager.setUserAnswer(myRadio)
+                }   
+
+            });
+            
+        });
+            function displayQuestion( QuestionElement, numberQuest , totalQuestion ) 
+	        {
+                $( "#Answer1" ).prop( "checked", false );
+                $( "#Answer2" ).prop( "checked", false );
+                $( "#Answer3" ).prop( "checked", false );
+
+                //displayLoadingAlert(false);
+                $("#QuestionNumber").text("Question n " + numberQuest )
+                $("#QuestionTitle").text(QuestionElement.question)
+               
+                $("#Answer1").attr("value", QuestionElement.answers[0])
+                $('#Answer1').next().text( QuestionElement.answers[0])
+                $("#Answer2").attr("value",QuestionElement.answers[1])
+                $('#Answer2').next().text( QuestionElement.answers[1])
+                $("#Answer3").attr("value",QuestionElement.answers[2])
+                $('#Answer3').next().text( QuestionElement.answers[2])
+
+                $("#questionsProgress").text( [ numberQuest -1] + " of " + totalQuestion )
+
+                $("#ProgressBar").attr("style", 'width:'+ percentage(numberQuest,totalQuestion) + '%')
+                $("#ProgressBar").text(percentage([ numberQuest -1] , totalQuestion)+ '%' );
+
+                
+
+
+               // console.log("UI",QuestionElement.answers, number )
+            }
+            function displayResult(allQuestion, answered, correctNumber) {  
+                $("#mainCard").hide()
+                $("#Result").show()
+
+                for (var i = 0; i <  allQuestion.length; i += 1) {
+                    $("#ResultTable").append("<tr>"+
+                        "<td>" + allQuestion[i].question + "</td>"+
+                        "<td>"+ allQuestion[i].correctAnswer + "</td>"+
+                        "<td>"+ answered[i] + "</td>"+
+                        "</tr>");
+                }
+                $("#ScoreMessage").text("Youre score is " + correctNumber + "/" + allQuestion.length + " ( " + percentage(correctNumber,allQuestion.length) +" % )")
+
+            }
+
+            function displayAlert(msg) {
+
+                $("#mainCard").hide()
+                $("#AlertMessage").text(msg)
+                $("#Alert").show()
+            }
+            function closeAlert(){
+                $("#Alert").hide()
+                $("#mainCard").show()
+            }
+
+            function percentage(partialValue, totalValue) {
+                // only int part
+                return (100 * partialValue) / totalValue | 0;;
+            }
+        </script>
+    </head>
+    <body>
+        <div class="w3-container w3-teal w3-center">
+            <h1>Survey</h1>
+        </div>
+        <div class="w3-container w3-center" > 
+            <!-- Main div for Survey questions -->
+
+
+                <div id="Welcome" class="w3-card-4 w3-margin w3-display-middle" style="width:50%;height: 40%;">
+                    <div class="w3-container w3-green w3-center">
+                      <h5>Welcome To Musical Survey</h5>
+                    </div>
+                    <div class="w3-container w3-center w3-display-middle">
+                      <p> Are you ready to start? </p>
+                    </div>
+                    <div class="w3-bar w3-center w3-display-bottommiddle">
+                        <button id="Cancel" class="w3-button w3-red">No</button>
+                        <button id="Confirm" class="w3-button w3-green">Yes</button>
+                    </div>
+                  </div>
+
+                  <div id="Goodbye"class="w3-card-4 w3-margin w3-display-middle" style="width:50%;height: 40%;">
+                    <div class="w3-container w3-green w3-center">
+                      <h5>Goodbye</h5>
+                    </div>
+                    <div class="w3-container w3-center w3-display-middle">
+                      <p> See you next time </p>
+                    </div>
+                  </div>
+
+            <div id="mainCard" class="w3-card-4 w3-margin w3-display-middle" style="width:50%;" >
+
+                <div class="w3-container w3-green">
+                  <p id="QuestionNumber"></p>
+                </div>
+                
+                <div id="formContainer" class="w3-container w3-card-4">
+                    <p id="QuestionTitle"></p>
+                    <p>
+                        <input id="Answer1" class="w3-radio" type="radio" name="answer" value="" >
+                        <label></label>
+                    </p>
+                    <p>
+                        <input id="Answer2" class="w3-radio" type="radio" name="answer" value="" >
+                        <label></label>
+                    </p>
+                    <p>
+                        <input id="Answer3" class="w3-radio" type="radio" name="answer" value="" >
+                        <label></label>
+                    </p>   
+                </div>
+                <button id="netx" class="w3-button w3-block w3-green">Next</button>
+                <br>
+                <div id="Progress" class="w3-light-grey w3-card-4" >
+                    <p>Progress <a id="questionsProgress"></a></p>
+                    <div id="ProgressBar" class="w3-container w3-green w3-center" style="width:0%">0%</div>
+                </div>
+            </div>
+            <!-- Div for show the result --> 
+            <div id="Result"class="w3-container w3-margin">
+                <div class="w3-container">
+                    <h3>Survey Result</h3>
+                </div>
+                <table id="ResultTable" class="w3-table-all w3-card-4">
+                    <tr>
+                      <th>Question</th>
+                      <th>Correct</th>
+                      <th>Answer</th>
+                    </tr>
+                </table>
+                <div class="w3-container w3-margin  w3-center">
+                    <p id="ScoreMessage"></p>
+                    <button id="RestartBtn" class="w3-button w3-green">Restart Quiz</button>
+                  </div>
+            </div>
+            <!-- Div used for allert message -->
+            <div id="Alert" class="w3-card-4 w3-display-middle w3-red">
+                <span class="w3-button w3-large w3-display-topright">&times;</span>
+                    <h3 class="w3-center">Alert !</h3>
+                    <p id="AlertMessage"></p>
+            </div> 
+        </div>
+    </body>
+</html>

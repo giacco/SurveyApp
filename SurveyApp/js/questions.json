@@ -1,0 +1,96 @@
+{
+    "survey" : [
+        {
+            "question": "Who is the guitarist of the english band Pink Floy ?",
+            "answers": [
+                "David Gilmour",
+                "Jimmy Page",
+                "Jimmy Handrix"
+            ],
+            "correctAnswer": "David Gilmour"
+        },
+        {
+            "question": "Which one of these bands performed at Woodstock festival ?",
+            "answers": [
+                "The Who",
+                "Led Zepplein",
+                "The Police"
+                ],
+            "correctAnswer": "The Who"
+        },
+        {
+            "question": "What is the real name of the italian artist known as Caparezza ?",
+            "answers": [
+                "Giovanni Lindo Ferretti",
+                "Michele Salvemini",
+                "Manuel Agnelli"
+            ],
+            "correctAnswer": "Michele Salvemini"
+        },
+        {
+            "question": "Which one of these bands wrote Roxenne ?",
+            "answers": [
+                "The Police",
+                "U2",
+                "Queen"
+                ],
+            "correctAnswer": "The Police"
+        },
+        {
+            "question": "Who is Demetrio Stratos ?",
+            "answers": [
+                "The singer of Area",
+                "The drummer of PFM",
+                "The guitarist of Afterhours"
+                ],
+            "correctAnswer": "The singer of Area"
+        },
+        {
+            "question": "Who is the composer of the Four Season (Le quattro stagioni) ?",
+            "answers": [
+                "Vivaldi",
+                "Salieri",
+                "Rossini"
+                ],
+            "correctAnswer": "Vivaldi"
+        },
+        {
+            "question": "Which of these artists won the Nobel Price ?",
+            "answers": [
+                "Bob Dylan",
+                "Stevie Wonder",
+                "Johnny Cash"
+                ],
+            "correctAnswer": "Bob Dylan"
+        },
+        {
+            "question": "What was the first band of Giovanni Lindo Ferreti ?",
+            "answers": [
+                "CCCP",
+                "CSI",
+                "PGR"
+                ],
+            "correctAnswer": "CCCP"
+        },
+        {
+            "question": "Which one of these artists was arrested ?",
+            "answers": [
+                "James Brown",
+                "Prince",
+                "Bono Vox"
+                ],
+            "correctAnswer": "James Brown"
+        },
+        {
+            "question": "Which band played Stairway to Heaven ?",
+            "answers": [
+                "Led Zeppelin",
+                "Pink Floyd",
+                "U2"
+                ],
+            "correctAnswer": "Led Zeppelin"
+        }
+
+        
+    ]
+}
