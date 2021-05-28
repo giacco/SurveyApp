@@ -1,8 +1,8 @@
 # SurveyApp
-Simple Survey App in javascript
+Simple Survey App in javascript, using w3css as syle
 
 # Download
-Download this repo 
+Clone this repo or download as zip
 ```git
 git clone https://github.com/giacco/SurveyApp.git
 ```
