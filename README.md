@@ -7,7 +7,7 @@ Download this repo
 git clone https://github.com/giacco/SurveyApp.git
 ```
 
-and palce the dowloaded folder into your webserver root directory
+and palce the downloaded folder into your webserver root directory
 
 # Demo
 ![](./surveyAppDemo.gif)
